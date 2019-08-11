@@ -1,0 +1,561 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Lista4}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{exercuxedcio-6}{%
+\section{Exercício 6}\label{exercuxedcio-6}}
+
+\hypertarget{a}{%
+\subsection{a)}\label{a}}
+
+No caso em que \(\theta _1\) é conhecido, podemos calcular a
+verossimilhança da seguinte maneira:
+
+\[ L(\bf{\theta}, \bf{x}) = \prod_{i = 1}^{n} \theta_1 \theta_2 x_i^{\theta_2  -1} e^{-\theta_ 1 x_i^{\theta_ 2}} \]
+
+\[ l(\bf{\theta}, \bf{x}) = \log (L(\bf{\theta}, \bf{x})) = \sum_{i = 1}^{n} \log(\theta_1 \theta_2 x_i^{\theta_2  -1}) -\theta_ 1 x_i^{\theta_ 2}  \]
+
+\[ U_n({\theta}) = \frac{\partial l(\bf{\theta}, \bf{x})}{\partial \theta_1} = \sum_{i = 1}^{n} \frac{1}{\theta_1} - x_i ^{\theta_2} \]
+
+\[ U_n'({\theta}) = \frac{\partial^2 l(\bf{\theta}, \bf{x})}{\partial \theta_1^2} = \sum_{i = 1}^{n} \frac{-1}{\theta_ 1^2}\]
+
+Com as funções score e sua derivada em relação ao parâmetro \(\theta\)
+calculados, utilizaremos o método de Newton-Raphson para procurar o
+valor de \(\theta\) que anule a função score:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{}função score }
+        score \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kr}{function}\PY{p}{(}x\PY{p}{,} theta\PY{p}{)}\PY{p}{\PYZob{}}
+          value \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{0}\PY{p}{,} \PY{l+m}{0}\PY{p}{)}
+          \PY{k+kr}{for} \PY{p}{(}i \PY{k+kr}{in} x\PY{p}{)}\PY{p}{\PYZob{}}
+            value\PY{p}{[}\PY{l+m}{1}\PY{p}{]} \PY{o}{\PYZlt{}\PYZhy{}} value\PY{p}{[}\PY{l+m}{1}\PY{p}{]} \PY{o}{+} \PY{p}{(}\PY{l+m}{1}\PY{o}{/}theta\PY{p}{[}\PY{l+m}{1}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZhy{}} i\PY{o}{\PYZca{}}theta\PY{p}{[}\PY{l+m}{2}\PY{p}{]}
+            value\PY{p}{[}\PY{l+m}{2}\PY{p}{]} \PY{o}{\PYZlt{}\PYZhy{}} value\PY{p}{[}\PY{l+m}{2}\PY{p}{]} \PY{o}{+} \PY{p}{(}\PY{l+m}{1}\PY{o}{/}theta\PY{p}{[}\PY{l+m}{2}\PY{p}{]}\PY{p}{)} \PY{o}{+} \PY{k+kp}{log}\PY{p}{(}i\PY{p}{)} \PY{o}{\PYZhy{}} theta\PY{p}{[}\PY{l+m}{1}\PY{p}{]}\PY{o}{*}i\PY{o}{\PYZca{}}theta\PY{p}{[}\PY{l+m}{2}\PY{p}{]}\PY{o}{*}\PY{k+kp}{log}\PY{p}{(}i\PY{p}{)}
+          \PY{p}{\PYZcb{}}
+          \PY{k+kr}{return}\PY{p}{(}value\PY{p}{)}
+        \PY{p}{\PYZcb{}}
+        \PY{c+c1}{\PYZsh{}derivada da função score em relação de theta}
+        scoreSlope \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kr}{function}\PY{p}{(}x\PY{p}{,} theta\PY{p}{)}\PY{p}{\PYZob{}}
+          value \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{0}\PY{p}{,} \PY{l+m}{0}\PY{p}{)}
+          \PY{k+kr}{for} \PY{p}{(}i \PY{k+kr}{in} x\PY{p}{)}\PY{p}{\PYZob{}}
+            value\PY{p}{[}\PY{l+m}{1}\PY{p}{]} \PY{o}{\PYZlt{}\PYZhy{}} value\PY{p}{[}\PY{l+m}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{l+m}{1}\PY{o}{/}theta\PY{p}{[}\PY{l+m}{1}\PY{p}{]}\PY{o}{\PYZca{}}\PY{l+m}{2}
+            value\PY{p}{[}\PY{l+m}{2}\PY{p}{]} \PY{o}{\PYZlt{}\PYZhy{}} value\PY{p}{[}\PY{l+m}{2}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{l+m}{1}\PY{o}{/}theta\PY{p}{[}\PY{l+m}{2}\PY{p}{]}\PY{o}{\PYZca{}}\PY{l+m}{2} \PY{o}{\PYZhy{}} theta\PY{p}{[}\PY{l+m}{1}\PY{p}{]}\PY{o}{*}i\PY{o}{\PYZca{}}theta\PY{p}{[}\PY{l+m}{2}\PY{p}{]}\PY{o}{*}\PY{k+kp}{log}\PY{p}{(}i\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m}{2}
+          \PY{p}{\PYZcb{}}
+          \PY{k+kr}{return}\PY{p}{(}value\PY{p}{)}
+        \PY{p}{\PYZcb{}}
+        \PY{c+c1}{\PYZsh{}amostra n = 100}
+        sample \PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{1.19}\PY{p}{,} \PY{l+m}{1.33}\PY{p}{,} \PY{l+m}{1.29}\PY{p}{,} \PY{l+m}{0.97}\PY{p}{,} \PY{l+m}{0.57}\PY{p}{,} \PY{l+m}{0.26}\PY{p}{,} \PY{l+m}{1.46}\PY{p}{,} \PY{l+m}{0.73}\PY{p}{,} \PY{l+m}{0.45}\PY{p}{,} \PY{l+m}{0.85}\PY{p}{,}
+                   \PY{l+m}{1.67}\PY{p}{,} \PY{l+m}{0.56}\PY{p}{,} \PY{l+m}{0.45}\PY{p}{,} \PY{l+m}{0.35}\PY{p}{,} \PY{l+m}{0.52}\PY{p}{,} \PY{l+m}{1.32}\PY{p}{,} \PY{l+m}{1.22}\PY{p}{,} \PY{l+m}{1.09}\PY{p}{,} \PY{l+m}{0.27}\PY{p}{,} \PY{l+m}{0.34}\PY{p}{,}
+                   \PY{l+m}{0.59}\PY{p}{,} \PY{l+m}{0.78}\PY{p}{,} \PY{l+m}{0.55}\PY{p}{,} \PY{l+m}{1.29}\PY{p}{,} \PY{l+m}{1.11}\PY{p}{,} \PY{l+m}{1.04}\PY{p}{,} \PY{l+m}{1.21}\PY{p}{,} \PY{l+m}{0.38}\PY{p}{,} \PY{l+m}{0.61}\PY{p}{,} \PY{l+m}{1.12}\PY{p}{,}
+                   \PY{l+m}{0.72}\PY{p}{,} \PY{l+m}{0.55}\PY{p}{,} \PY{l+m}{0.90}\PY{p}{,} \PY{l+m}{0.26}\PY{p}{,} \PY{l+m}{0.90}\PY{p}{,} \PY{l+m}{0.54}\PY{p}{,} \PY{l+m}{0.99}\PY{p}{,} \PY{l+m}{0.67}\PY{p}{,} \PY{l+m}{1.36}\PY{p}{,} \PY{l+m}{0.18}\PY{p}{,}
+                   \PY{l+m}{0.58}\PY{p}{,} \PY{l+m}{0.22}\PY{p}{,} \PY{l+m}{1.38}\PY{p}{,} \PY{l+m}{1.36}\PY{p}{,} \PY{l+m}{0.35}\PY{p}{,} \PY{l+m}{1.43}\PY{p}{,} \PY{l+m}{0.04}\PY{p}{,} \PY{l+m}{0.26}\PY{p}{,} \PY{l+m}{0.86}\PY{p}{,} \PY{l+m}{1.06}\PY{p}{,}
+                   \PY{l+m}{1.47}\PY{p}{,} \PY{l+m}{0.42}\PY{p}{,} \PY{l+m}{0.62}\PY{p}{,} \PY{l+m}{0.58}\PY{p}{,} \PY{l+m}{0.65}\PY{p}{,} \PY{l+m}{0.54}\PY{p}{,} \PY{l+m}{0.76}\PY{p}{,} \PY{l+m}{0.93}\PY{p}{,} \PY{l+m}{1.15}\PY{p}{,} \PY{l+m}{0.92}\PY{p}{,}
+                   \PY{l+m}{1.95}\PY{p}{,} \PY{l+m}{1.29}\PY{p}{,} \PY{l+m}{0.64}\PY{p}{,} \PY{l+m}{0.13}\PY{p}{,} \PY{l+m}{1.70}\PY{p}{,} \PY{l+m}{1.00}\PY{p}{,} \PY{l+m}{0.75}\PY{p}{,} \PY{l+m}{1.09}\PY{p}{,} \PY{l+m}{1.40}\PY{p}{,} \PY{l+m}{1.26}\PY{p}{,}
+                   \PY{l+m}{0.87}\PY{p}{,} \PY{l+m}{0.80}\PY{p}{,} \PY{l+m}{0.67}\PY{p}{,} \PY{l+m}{0.47}\PY{p}{,} \PY{l+m}{0.66}\PY{p}{,} \PY{l+m}{0.33}\PY{p}{,} \PY{l+m}{0.56}\PY{p}{,} \PY{l+m}{1.01}\PY{p}{,} \PY{l+m}{1.54}\PY{p}{,} \PY{l+m}{0.46}\PY{p}{,}
+                   \PY{l+m}{1.39}\PY{p}{,} \PY{l+m}{1.30}\PY{p}{,} \PY{l+m}{1.17}\PY{p}{,} \PY{l+m}{1.60}\PY{p}{,} \PY{l+m}{1.16}\PY{p}{,} \PY{l+m}{0.93}\PY{p}{,} \PY{l+m}{1.27}\PY{p}{,} \PY{l+m}{0.20}\PY{p}{,} \PY{l+m}{1.17}\PY{p}{,} \PY{l+m}{0.42}\PY{p}{,}
+                   \PY{l+m}{1.53}\PY{p}{,} \PY{l+m}{0.31}\PY{p}{,} \PY{l+m}{1.31}\PY{p}{,} \PY{l+m}{1.20}\PY{p}{,} \PY{l+m}{0.75}\PY{p}{,} \PY{l+m}{0.72}\PY{p}{,} \PY{l+m}{1.97}\PY{p}{,} \PY{l+m}{1.26}\PY{p}{,} \PY{l+m}{0.48}\PY{p}{,} \PY{l+m}{0.27}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}tolerância entre iterações para parada}
+        eps \PY{o}{=} \PY{l+m}{10}\PY{o}{\PYZca{}}\PY{p}{(}\PY{l+m}{\PYZhy{}5}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}theta inicial}
+        theta \PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{2.2}\PY{p}{,} \PY{l+m}{1}\PY{p}{)}
+        error \PY{o}{=} \PY{l+m}{10}
+        iteration \PY{o}{=} \PY{l+m}{0}
+        
+        \PY{c+c1}{\PYZsh{}iterações do método de Newton\PYZhy{}Raphson}
+        \PY{k+kr}{while}\PY{p}{(}error \PY{o}{\PYZgt{}} eps\PY{p}{)}\PY{p}{\PYZob{}}
+            thetaBefore \PY{o}{=} theta
+            theta\PY{p}{[}\PY{l+m}{1}\PY{p}{]} \PY{o}{\PYZlt{}\PYZhy{}} theta\PY{p}{[}\PY{l+m}{1}\PY{p}{]} \PY{o}{\PYZhy{}} score\PY{p}{(}\PY{k+kp}{sample}\PY{p}{,} theta\PY{p}{)}\PY{p}{[}\PY{l+m}{1}\PY{p}{]}\PY{o}{/}scoreSlope\PY{p}{(}\PY{k+kp}{sample}\PY{p}{,} theta\PY{p}{)}\PY{p}{[}\PY{l+m}{1}\PY{p}{]}
+            error \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{abs}\PY{p}{(}theta\PY{p}{[}\PY{l+m}{1}\PY{p}{]} \PY{o}{\PYZhy{}} thetaBefore\PY{p}{[}\PY{l+m}{1}\PY{p}{]}\PY{p}{)}
+            iteration \PY{o}{=} iteration \PY{o}{+} \PY{l+m}{1}
+        \PY{p}{\PYZcb{}}
+        
+        \PY{c+c1}{\PYZsh{}printa resultados}
+        \PY{k+kp}{cat}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Error = \PYZdq{}}\PY{p}{,} error\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZbs{}n\PYZdq{}}\PY{p}{)}
+        \PY{k+kp}{cat}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Result = \PYZdq{}}\PY{p}{,} theta\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZbs{}n\PYZdq{}}\PY{p}{)}
+        \PY{k+kp}{cat}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Number of iterations = \PYZdq{}}\PY{p}{,} iteration\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZbs{}n\PYZdq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}função distribuição de probabilidade}
+        f \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kr}{function}\PY{p}{(}x\PY{p}{,} theta\PY{p}{)}\PY{p}{\PYZob{}}
+            \PY{k+kr}{return}\PY{p}{(}theta\PY{p}{[}\PY{l+m}{1}\PY{p}{]}\PY{o}{*}theta\PY{p}{[}\PY{l+m}{2}\PY{p}{]}\PY{o}{*}x\PY{o}{\PYZca{}}\PY{p}{(}theta\PY{p}{[}\PY{l+m}{2}\PY{p}{]}\PY{l+m}{\PYZhy{}1}\PY{p}{)}\PY{o}{*}\PY{k+kp}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}theta\PY{p}{[}\PY{l+m}{1}\PY{p}{]}\PY{o}{*}x\PY{o}{\PYZca{}}theta\PY{p}{[}\PY{l+m}{2}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+        \PY{p}{\PYZcb{}}
+        
+        \PY{c+c1}{\PYZsh{}plota hitogramas e fdp}
+        hist\PY{p}{(}\PY{k+kp}{sample}\PY{p}{,} probability \PY{o}{=} \PY{k+kc}{TRUE}\PY{p}{)}
+        lines\PY{p}{(}\PY{k+kp}{seq}\PY{p}{(}from\PY{o}{=}\PY{l+m}{0}\PY{p}{,} to\PY{o}{=}\PY{l+m}{2}\PY{p}{,} by\PY{o}{=}\PY{l+m}{0.01}\PY{p}{)}\PY{p}{,} f\PY{p}{(}\PY{k+kp}{seq}\PY{p}{(}from\PY{o}{=}\PY{l+m}{0}\PY{p}{,} to\PY{o}{=}\PY{l+m}{2}\PY{p}{,} by\PY{o}{=}\PY{l+m}{0.01}\PY{p}{)}\PY{p}{,} theta\PY{p}{)}\PY{p}{,} col\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{blue\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1] 2.2 1.0
+[1] 0.179036 1.000000
+[1] 0.3301178 1.0000000
+[1] 0.5651961 1.0000000
+[1] 0.8518028 1.0000000
+[1] 1.070838 1.000000
+[1] 1.141644 1.000000
+[1] 1.146636 1.000000
+[1] 1.146657 1.000000
+Error =  4.190088e-10 
+Result =  1.146657 1 
+Number of iterations =  9 
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_1_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Logo, em 9 iterações, obtemos \(\theta = \theta_1 = 1.146657\) com
+tolerância entre iterações \(\epsilon = 10^{-5}\). Notamos pelo
+histograma de frequências e a curva de distribuição que a estimativa de
+máxima verossimilhança obtida não é próxima a distribuição,
+especialmente para classes menores que \(0.5\). Isso ocorre pois no caso
+em que \(\theta_2 = 1\), o modelo se reduz a uma distribuição
+exponencial, entretanto, a amostra observada não é compatível com o
+modelo exponencial. Logo, um valor diferente de \(\theta_2\) deve ser
+infeirdo.
+
+    \hypertarget{b}{%
+\subsection{b)}\label{b}}
+
+Para realizar a estimativa de máxima verossimilhança para
+\(\theta = (\theta_1 , \theta_2)\), podemos realizar um processo similar
+com a técnica unidimensional mencionada, calculando a derivada parcial
+para cada parâmetro e convergendo individualmente cada parâmetro
+utilizando método de Newton-Raphson. Determinamos que o processo
+iterativo converge quando o maior valor da diferença absoluta do valor
+de parâmetro entre as iterações for menor que o valor de tolerância
+\(\epsilon\), isto é:
+
+\[ Diff(i, i+1) = \max (|\theta_{1(i)} - \theta_{1(i + 1)}|, |\theta_{2(i)} - \theta_{2(i + 1)}|) < \epsilon\]
+
+Já calculamos a função score para \(\theta_1\), calculamos agora função
+score para o parâmetro \(\theta_2\):
+
+\[ U_n({\theta}) = \frac{\partial l(\bf{\theta}, \bf{x})}{\partial \theta_2} = \sum_{i = 1}^{n} \frac{1}{\theta_2} + \log(x_ i) - \theta_1 x_ i^{\theta_2}\log(x_ i)\]
+
+\[ U_n'({\theta}) = \frac{\partial^2 l(\bf{\theta}, \bf{x})}{\partial \theta_2^2} = \sum_{i = 1}^{n} \frac{-1}{\theta_ 2^2} - \theta_1 x_i^{\theta_2} (\log x_ i)^2\]
+
+Assim, podemos iterativamente converger nos valores de máxima
+verossimilhança de \(\theta\).
+
+    \hypertarget{c}{%
+\subsection{c)}\label{c}}
+
+Por final, utilizamos o seguinte script para realizar Newton-Raphson:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} eps \PY{o}{=} \PY{l+m}{10}\PY{o}{\PYZca{}}\PY{p}{(}\PY{l+m}{\PYZhy{}5}\PY{p}{)}
+        theta \PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{2}\PY{p}{,} \PY{l+m}{2}\PY{p}{)}
+        error \PY{o}{=} \PY{l+m}{10}
+        iteration \PY{o}{=} \PY{l+m}{0}
+        
+        \PY{k+kr}{while}\PY{p}{(}error \PY{o}{\PYZgt{}} eps\PY{p}{)}\PY{p}{\PYZob{}}
+            thetaBefore \PY{o}{=} theta
+            theta \PY{o}{\PYZlt{}\PYZhy{}} theta \PY{o}{\PYZhy{}} score\PY{p}{(}\PY{k+kp}{sample}\PY{p}{,} theta\PY{p}{)}\PY{o}{/}scoreSlope\PY{p}{(}\PY{k+kp}{sample}\PY{p}{,} theta\PY{p}{)}
+            error \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{max}\PY{p}{(}\PY{k+kp}{abs}\PY{p}{(}theta \PY{o}{\PYZhy{}} thetaBefore\PY{p}{)}\PY{p}{)}
+            iteration \PY{o}{\PYZlt{}\PYZhy{}} iteration \PY{o}{+} \PY{l+m}{1}
+        \PY{p}{\PYZcb{}}
+        
+        \PY{k+kp}{cat}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Error = \PYZdq{}}\PY{p}{,} error\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZbs{}n\PYZdq{}}\PY{p}{)}
+        \PY{k+kp}{cat}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Result = \PYZdq{}}\PY{p}{,} theta\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZbs{}n\PYZdq{}}\PY{p}{)}
+        \PY{k+kp}{cat}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Number of iterations = \PYZdq{}}\PY{p}{,} iteration\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZbs{}n\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Error =  4.196248e-06 
+Result =  1.035318 2.079401 
+Number of iterations =  14 
+
+    \end{Verbatim}
+
+    Logo, em 14 iterações, obtemos
+\(\theta = (\theta_1, \theta_2) = (1.035318, 2.079401)\).
+
+    \hypertarget{d}{%
+\subsection{d)}\label{d}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} hist\PY{p}{(}\PY{k+kp}{sample}\PY{p}{,} probability \PY{o}{=} \PY{k+kc}{TRUE}\PY{p}{)}
+        lines\PY{p}{(}\PY{k+kp}{seq}\PY{p}{(}from\PY{o}{=}\PY{l+m}{0}\PY{p}{,} to\PY{o}{=}\PY{l+m}{2}\PY{p}{,} by\PY{o}{=}\PY{l+m}{0.01}\PY{p}{)}\PY{p}{,} f\PY{p}{(}\PY{k+kp}{seq}\PY{p}{(}from\PY{o}{=}\PY{l+m}{0}\PY{p}{,} to\PY{o}{=}\PY{l+m}{2}\PY{p}{,} by\PY{o}{=}\PY{l+m}{0.01}\PY{p}{)}\PY{p}{,} theta\PY{p}{)}\PY{p}{,} col\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{blue\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_8_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Notamos que a distribuição obtida é próxima ao formato do histograma da
+amostra observada, sendo muito mais próximo do que tentativa anterior
+assumindo \(\theta_2 = 1\). Entretanto, há discrepâncias entre algumas
+classes do histograma com a distribuição, o que é razoável para uma
+amostra com tamanho modesto (\(n = 100\)).
+
+    \hypertarget{e}{%
+\subsection{e)}\label{e}}
+
+Podemos, por invariância, procurar o estimador de outra função de
+\(\theta\), que tem imagem somente nos reais posistivos. Isto é, podemos
+utilizar Newton-Raphson para buscar por um \(\alpha\) tal que:
+
+\[ \theta_n = e^{\alpha_n},  \qquad i = 1,2\]
+
+Sendo que o estimador de máxima verossimilhança de \(\theta\) é igual a
+\(e^{\hat{\alpha}}\), em que \(\hat{\alpha}\) é o estimador de máxima
+verossimilhança de \(\alpha\). Neste caso, \(\alpha\) pode variar no
+espaço \(\mathbb{R}\), e como a imagem da função exponencial está
+definida somente no \(\mathbb{R}_+\), conveniementemente nos
+restringimos no espaço pertinente para buscar os parâmetros.
+
+Entretanto, percebemos que devemos obter a função score em função de
+\(\alpha\), derivadas em relação a \(\alpha\). Para isso, utilizamos o
+pacote numDeriv disponível para R, assim realizamos derivada numérica.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{}biblioteca para realizar derivada numerica}
+         \PY{k+kn}{library}\PY{p}{(}numDeriv\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}funcao likelihood que deve ser derivada para obter score}
+         \PY{c+c1}{\PYZsh{}note que amostra não é parâmetro da função para evitar que }
+         \PY{c+c1}{\PYZsh{}influnecie no resultado da derivada por  numDeriv}
+         likelihood \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kr}{function}\PY{p}{(}alpha\PY{p}{)}\PY{p}{\PYZob{}}
+           value \PY{o}{\PYZlt{}\PYZhy{}} \PY{l+m}{0}
+           x \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{1.19}\PY{p}{,} \PY{l+m}{1.33}\PY{p}{,} \PY{l+m}{1.29}\PY{p}{,} \PY{l+m}{0.97}\PY{p}{,} \PY{l+m}{0.57}\PY{p}{,} \PY{l+m}{0.26}\PY{p}{,} \PY{l+m}{1.46}\PY{p}{,} \PY{l+m}{0.73}\PY{p}{,} \PY{l+m}{0.45}\PY{p}{,} \PY{l+m}{0.85}\PY{p}{,}
+                 \PY{l+m}{1.67}\PY{p}{,} \PY{l+m}{0.56}\PY{p}{,} \PY{l+m}{0.45}\PY{p}{,} \PY{l+m}{0.35}\PY{p}{,} \PY{l+m}{0.52}\PY{p}{,} \PY{l+m}{1.32}\PY{p}{,} \PY{l+m}{1.22}\PY{p}{,} \PY{l+m}{1.09}\PY{p}{,} \PY{l+m}{0.27}\PY{p}{,} \PY{l+m}{0.34}\PY{p}{,}
+                 \PY{l+m}{0.59}\PY{p}{,} \PY{l+m}{0.78}\PY{p}{,} \PY{l+m}{0.55}\PY{p}{,} \PY{l+m}{1.29}\PY{p}{,} \PY{l+m}{1.11}\PY{p}{,} \PY{l+m}{1.04}\PY{p}{,} \PY{l+m}{1.21}\PY{p}{,} \PY{l+m}{0.38}\PY{p}{,} \PY{l+m}{0.61}\PY{p}{,} \PY{l+m}{1.12}\PY{p}{,}
+                 \PY{l+m}{0.72}\PY{p}{,} \PY{l+m}{0.55}\PY{p}{,} \PY{l+m}{0.90}\PY{p}{,} \PY{l+m}{0.26}\PY{p}{,} \PY{l+m}{0.90}\PY{p}{,} \PY{l+m}{0.54}\PY{p}{,} \PY{l+m}{0.99}\PY{p}{,} \PY{l+m}{0.67}\PY{p}{,} \PY{l+m}{1.36}\PY{p}{,} \PY{l+m}{0.18}\PY{p}{,}
+                 \PY{l+m}{0.58}\PY{p}{,} \PY{l+m}{0.22}\PY{p}{,} \PY{l+m}{1.38}\PY{p}{,} \PY{l+m}{1.36}\PY{p}{,} \PY{l+m}{0.35}\PY{p}{,} \PY{l+m}{1.43}\PY{p}{,} \PY{l+m}{0.04}\PY{p}{,} \PY{l+m}{0.26}\PY{p}{,} \PY{l+m}{0.86}\PY{p}{,} \PY{l+m}{1.06}\PY{p}{,}
+                 \PY{l+m}{1.47}\PY{p}{,} \PY{l+m}{0.42}\PY{p}{,} \PY{l+m}{0.62}\PY{p}{,} \PY{l+m}{0.58}\PY{p}{,} \PY{l+m}{0.65}\PY{p}{,} \PY{l+m}{0.54}\PY{p}{,} \PY{l+m}{0.76}\PY{p}{,} \PY{l+m}{0.93}\PY{p}{,} \PY{l+m}{1.15}\PY{p}{,} \PY{l+m}{0.92}\PY{p}{,}
+                 \PY{l+m}{1.95}\PY{p}{,} \PY{l+m}{1.29}\PY{p}{,} \PY{l+m}{0.64}\PY{p}{,} \PY{l+m}{0.13}\PY{p}{,} \PY{l+m}{1.70}\PY{p}{,} \PY{l+m}{1.00}\PY{p}{,} \PY{l+m}{0.75}\PY{p}{,} \PY{l+m}{1.09}\PY{p}{,} \PY{l+m}{1.40}\PY{p}{,} \PY{l+m}{1.26}\PY{p}{,}
+                 \PY{l+m}{0.87}\PY{p}{,} \PY{l+m}{0.80}\PY{p}{,} \PY{l+m}{0.67}\PY{p}{,} \PY{l+m}{0.47}\PY{p}{,} \PY{l+m}{0.66}\PY{p}{,} \PY{l+m}{0.33}\PY{p}{,} \PY{l+m}{0.56}\PY{p}{,} \PY{l+m}{1.01}\PY{p}{,} \PY{l+m}{1.54}\PY{p}{,} \PY{l+m}{0.46}\PY{p}{,}
+                 \PY{l+m}{1.39}\PY{p}{,} \PY{l+m}{1.30}\PY{p}{,} \PY{l+m}{1.17}\PY{p}{,} \PY{l+m}{1.60}\PY{p}{,} \PY{l+m}{1.16}\PY{p}{,} \PY{l+m}{0.93}\PY{p}{,} \PY{l+m}{1.27}\PY{p}{,} \PY{l+m}{0.20}\PY{p}{,} \PY{l+m}{1.17}\PY{p}{,} \PY{l+m}{0.42}\PY{p}{,}
+                 \PY{l+m}{1.53}\PY{p}{,} \PY{l+m}{0.31}\PY{p}{,} \PY{l+m}{1.31}\PY{p}{,} \PY{l+m}{1.20}\PY{p}{,} \PY{l+m}{0.75}\PY{p}{,} \PY{l+m}{0.72}\PY{p}{,} \PY{l+m}{1.97}\PY{p}{,} \PY{l+m}{1.26}\PY{p}{,} \PY{l+m}{0.48}\PY{p}{,} \PY{l+m}{0.27}\PY{p}{)}
+           theta \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{exp}\PY{p}{(}alpha\PY{p}{)}
+           \PY{k+kr}{for} \PY{p}{(}i \PY{k+kr}{in} x\PY{p}{)}\PY{p}{\PYZob{}}
+             value \PY{o}{=} value \PY{o}{+} \PY{k+kp}{log}\PY{p}{(}theta\PY{p}{[}\PY{l+m}{1}\PY{p}{]}\PY{o}{*}theta\PY{p}{[}\PY{l+m}{2}\PY{p}{]}\PY{o}{*}i\PY{o}{\PYZca{}}\PY{p}{(}theta\PY{p}{[}\PY{l+m}{2}\PY{p}{]}\PY{l+m}{\PYZhy{}1}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZhy{}} theta\PY{p}{[}\PY{l+m}{1}\PY{p}{]}\PY{o}{*}i\PY{o}{\PYZca{}}\PY{p}{(}theta\PY{p}{[}\PY{l+m}{2}\PY{p}{]}\PY{p}{)}
+           \PY{p}{\PYZcb{}}
+           \PY{k+kr}{return}\PY{p}{(}value\PY{p}{)}
+         \PY{p}{\PYZcb{}}
+         
+         eps \PY{o}{=} \PY{l+m}{10}\PY{o}{\PYZca{}}\PY{p}{(}\PY{l+m}{\PYZhy{}5}\PY{p}{)}
+         alpha \PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{2}\PY{p}{,} \PY{l+m}{2}\PY{p}{)}
+         error \PY{o}{=} \PY{l+m}{10}
+         
+         \PY{k+kr}{while}\PY{p}{(}error \PY{o}{\PYZgt{}} eps\PY{p}{)}\PY{p}{\PYZob{}}
+             alphaBefore \PY{o}{=} alpha
+             alpha \PY{o}{\PYZlt{}\PYZhy{}} alpha \PY{o}{\PYZhy{}} grad\PY{p}{(}likelihood\PY{p}{,} alpha\PY{p}{)}\PY{o}{/}\PY{k+kp}{diag}\PY{p}{(}hessian\PY{p}{(}likelihood\PY{p}{,} alpha\PY{p}{)}\PY{p}{)}
+             error \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{min}\PY{p}{(}\PY{k+kp}{abs}\PY{p}{(}alpha \PY{o}{\PYZhy{}} alphaBefore\PY{p}{)}\PY{p}{)}
+         \PY{p}{\PYZcb{}}
+         
+         \PY{k+kp}{cat}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Error = \PYZdq{}}\PY{p}{,} error\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZbs{}n\PYZdq{}}\PY{p}{)}
+         \PY{k+kp}{cat}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Alpha= \PYZdq{}}\PY{p}{,} alpha\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZbs{}n\PYZdq{}}\PY{p}{)}
+         \PY{k+kp}{cat}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Result = \PYZdq{}}\PY{p}{,} \PY{k+kp}{exp}\PY{p}{(}alpha\PY{p}{)}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZbs{}n\PYZdq{}}\PY{p}{)}
+         
+         f \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kr}{function}\PY{p}{(}x\PY{p}{,} theta\PY{p}{)}\PY{p}{\PYZob{}}
+             \PY{k+kr}{return}\PY{p}{(}theta\PY{p}{[}\PY{l+m}{1}\PY{p}{]}\PY{o}{*}theta\PY{p}{[}\PY{l+m}{2}\PY{p}{]}\PY{o}{*}x\PY{o}{\PYZca{}}\PY{p}{(}theta\PY{p}{[}\PY{l+m}{2}\PY{p}{]}\PY{l+m}{\PYZhy{}1}\PY{p}{)}\PY{o}{*}\PY{k+kp}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}theta\PY{p}{[}\PY{l+m}{1}\PY{p}{]}\PY{o}{*}x\PY{o}{\PYZca{}}theta\PY{p}{[}\PY{l+m}{2}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{p}{\PYZcb{}}
+         
+         hist\PY{p}{(}\PY{k+kp}{sample}\PY{p}{,} probability \PY{o}{=} \PY{k+kc}{TRUE}\PY{p}{)}
+         lines\PY{p}{(}\PY{k+kp}{seq}\PY{p}{(}from\PY{o}{=}\PY{l+m}{0}\PY{p}{,} to\PY{o}{=}\PY{l+m}{2}\PY{p}{,} by\PY{o}{=}\PY{l+m}{0.01}\PY{p}{)}\PY{p}{,} f\PY{p}{(}\PY{k+kp}{seq}\PY{p}{(}from\PY{o}{=}\PY{l+m}{0}\PY{p}{,} to\PY{o}{=}\PY{l+m}{2}\PY{p}{,} by\PY{o}{=}\PY{l+m}{0.01}\PY{p}{)}\PY{p}{,} \PY{k+kp}{exp}\PY{p}{(}theta\PY{p}{)}\PY{p}{)}\PY{p}{,} col\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{blue\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Error =  3.767823e-06 
+Alpha=  0.03470743 0.7320804 
+Result =  1.035317 2.079402 
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_11_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
